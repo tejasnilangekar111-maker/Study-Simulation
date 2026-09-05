@@ -1,0 +1,17 @@
+export const MOTIVATIONAL_QUOTES = [
+  { text: 'The secret of getting ahead is getting started.', author: 'Mark Twain' },
+  { text: "Don't watch the clock; do what it does. Keep going.", author: 'Sam Levenson' },
+  { text: 'Success is the sum of small efforts repeated day in and day out.', author: 'Robert Collier' },
+  { text: 'The expert in anything was once a beginner.', author: 'Helen Hayes' },
+  { text: 'Discipline is choosing between what you want now and what you want most.', author: 'Abraham Lincoln' },
+  { text: 'It always seems impossible until it is done.', author: 'Nelson Mandela' },
+  { text: 'The future depends on what you do today.', author: 'Mahatma Gandhi' },
+  { text: "You don't have to be great to start, but you have to start to be great.", author: 'Zig Ziglar' },
+  { text: 'Small daily improvements are the key to staggering long-term results.', author: 'James Clear' },
+  { text: 'Focus on being productive instead of busy.', author: 'Tim Ferriss' },
+  { text: 'The only way to do great work is to love what you do.', author: 'Steve Jobs' },
+  { text: 'Push yourself, because no one else is going to do it for you.', author: 'Unknown' },
+  { text: 'Well done is better than well said.', author: 'Benjamin Franklin' },
+  { text: 'A little progress each day adds up to big results.', author: 'Unknown' },
+  { text: 'Study while others are sleeping; work while others are loafing.', author: 'William A. Ward' },
+]

@@ -1,0 +1,9 @@
+# Activate with SPRING_PROFILES_ACTIVE=prod. Schema changes must go through
+# Flyway migrations (db/migration/) and be reviewed before deploy — Hibernate
+# is only allowed to validate the schema matches, never auto-alter it.
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
