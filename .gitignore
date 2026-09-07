@@ -7,3 +7,4 @@ target/
 .vscode/
 *.iml
 .DS_Store
+.claude/settings.local.json
