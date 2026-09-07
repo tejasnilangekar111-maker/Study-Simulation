@@ -13,6 +13,6 @@ export const SOUND_CHANNELS = [
 export const DEFAULT_WORK_MINUTES = 25
 export const DEFAULT_BREAK_MINUTES = 5
 
-export const IDLE_TIMEOUT_MS = 10000
+export const IDLE_TIMEOUT_MS = 90000
 
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api'
