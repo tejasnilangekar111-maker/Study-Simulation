@@ -52,13 +52,7 @@ export default function Navbar() {
             >
               <FiSettings size={18} />
             </button>
-            <button
-              onClick={() => setSettingsOpen(true)}
-              className="glass rounded-full w-10 h-10 flex items-center justify-center text-offwhite/80 hover:text-offwhite transition-colors"
-              aria-label="Profile"
-            >
-              <FiUser size={18} />
-            </button>
+           
           </motion.nav>
         )}
       </AnimatePresence>
