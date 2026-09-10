@@ -44,6 +44,26 @@ public class AuthService {
     @Value("${app.admin.notification-email:}")
     private String adminNotificationEmail;
 
+    private static final String GUEST_USERNAME = "guest";
+    private static final String GUEST_EMAIL = "guest@studysimulation.local";
+
+    @Transactional
+    public AuthResponse guestLogin() {
+        User user = userRepository.findByUsernameOrEmail(GUEST_USERNAME, GUEST_USERNAME)
+                .orElseGet(this::createGuestUser);
+        String token = jwtService.generateToken(user.getUsername());
+        return new AuthResponse(token, user.getUsername());
+    }
+
+    private User createGuestUser() {
+        User user = new User();
+        user.setUsername(GUEST_USERNAME);
+        user.setEmail(GUEST_EMAIL);
+        user.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
+        user.setStreak(0);
+        return userRepository.save(user);
+    }
+
     @Transactional
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {

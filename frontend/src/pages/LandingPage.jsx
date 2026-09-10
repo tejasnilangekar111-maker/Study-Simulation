@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { FiPlay, FiChevronDown, FiLogIn } from 'react-icons/fi'
+import { FiPlay, FiChevronDown } from 'react-icons/fi'
 import LibraryScene from '../components/LibraryScene/LibraryScene'
 import StudyGroupIllustration from '../components/LibraryScene/StudyGroupIllustration'
 import { startAudioEngine } from '../hooks/useProceduralAudio'
@@ -78,17 +78,6 @@ export default function LandingPage() {
           >
             <FiPlay size={20} />
             Start Focus Session
-          </motion.button>
-
-          <motion.button
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            onClick={() => navigate('/login')}
-            className="rounded-full px-6 py-3.5 flex items-center gap-2 text-sm font-medium text-offwhite/70 hover:text-offwhite border border-white/15 hover:border-white/30 transition-colors"
-          >
-            <FiLogIn size={16} />
-            Sign in
           </motion.button>
         </motion.div>
 
