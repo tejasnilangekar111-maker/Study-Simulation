@@ -28,7 +28,7 @@ export default function Navbar() {
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                  `flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue ${
                     isActive ? 'bg-accent-blue/25 text-accent-blue' : 'text-offwhite/70 hover:text-offwhite hover:bg-white/10'
                   }`
                 }

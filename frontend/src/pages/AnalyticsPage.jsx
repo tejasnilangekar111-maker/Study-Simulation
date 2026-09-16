@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FiArrowLeft, FiClock, FiCheckCircle, FiZap, FiAward } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { useSidebarStore } from '../store/sidebarStore'
+import { useUiStore } from '../store/uiStore'
 import Navbar from '../components/Navbar/Navbar'
 import Sidebar from '../components/Sidebar/Sidebar'
 import LofiScene from '../components/LibraryScene/LofiScene'
@@ -19,7 +20,7 @@ function StatCard({ icon: Icon, label, value, color }) {
         <Icon size={18} />
       </div>
       <div>
-        <p className="text-xs uppercase tracking-wide text-offwhite/50">{label}</p>
+        <p className="text-xs uppercase tracking-wide text-offwhite/60">{label}</p>
         <p className="text-xl font-bold">{value}</p>
       </div>
     </motion.div>
@@ -64,7 +65,7 @@ function WeeklyChart({ data }) {
                 }`}
               />
             </div>
-            <span className="text-xs text-offwhite/50">{d.label}</span>
+            <span className="text-xs text-offwhite/60">{d.label}</span>
           </div>
         ))}
       </div>
@@ -126,10 +127,12 @@ export default function AnalyticsPage() {
   const getHeatmapData = useSidebarStore((s) => s.getHeatmapData)
   const getTotals = useSidebarStore((s) => s.getTotals)
   const streak = useSidebarStore((s) => s.streak)
+  const sidebarCollapsed = useUiStore((s) => s.sidebarCollapsed)
 
   const weekly = getWeeklyChartData()
   const heatmap = getHeatmapData(28)
   const { totalMinutes, totalSessions } = getTotals()
+  const contentPaddingClass = sidebarCollapsed ? 'pl-0 md:pl-24' : 'pl-0 md:pl-72'
 
   return (
     <div className="relative min-h-screen w-full bg-lofi-950 text-offwhite">
@@ -138,10 +141,10 @@ export default function AnalyticsPage() {
       <Sidebar />
       <SleepReminderBanner />
 
-      <div className="relative z-10 pl-0 md:pl-[280px] px-6 py-24 max-w-5xl mx-auto transition-all">
+      <div className={`relative z-10 ${contentPaddingClass} px-6 py-24 max-w-5xl mx-auto transition-[padding] duration-300`}>
         <button
           onClick={() => navigate('/study')}
-          className="flex items-center gap-2 text-sm text-offwhite/60 hover:text-offwhite mb-6"
+          className="flex items-center gap-2 text-sm text-offwhite/60 hover:text-offwhite mb-6 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
         >
           <FiArrowLeft size={14} /> Back to study room
         </button>

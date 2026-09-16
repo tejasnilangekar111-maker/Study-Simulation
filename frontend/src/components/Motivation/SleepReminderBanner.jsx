@@ -54,7 +54,7 @@ export default function SleepReminderBanner() {
             </p>
             <button
               onClick={dismiss}
-              className="text-offwhite/50 hover:text-offwhite shrink-0"
+              className="text-offwhite/60 hover:text-offwhite shrink-0"
               aria-label="Dismiss"
             >
               <FiX size={16} />

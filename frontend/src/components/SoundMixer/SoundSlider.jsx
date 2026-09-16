@@ -16,7 +16,7 @@ export default function SoundSlider({ channel }) {
           startAudioEngine()
           toggleMute(key)
         }}
-        className="text-offwhite/70 hover:text-accent-blue transition-colors shrink-0"
+        className="text-offwhite/70 hover:text-accent-blue transition-colors shrink-0 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
         aria-label={`Mute ${label}`}
       >
         {muted || volume === 0 ? <FiVolumeX size={16} /> : <FiVolume2 size={16} />}

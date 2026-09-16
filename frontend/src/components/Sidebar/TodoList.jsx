@@ -35,17 +35,17 @@ export default function TodoList() {
         {todos.map((t) => (
           <li key={t.id} className="flex items-center gap-2 text-sm group">
             <input type="checkbox" checked={t.done} onChange={() => toggleTodo(t.id)} className="accent-emerald-500" />
-            <span className={`flex-1 ${t.done ? 'line-through text-offwhite/40' : ''}`}>{t.text}</span>
+            <span className={`flex-1 ${t.done ? 'line-through text-offwhite/55' : ''}`}>{t.text}</span>
             <button
               onClick={() => removeTodo(t.id)}
-              className="opacity-0 group-hover:opacity-100 text-offwhite/50 hover:text-coral-500 transition-opacity"
+              className="opacity-0 group-hover:opacity-100 text-offwhite/60 hover:text-coral-500 transition-opacity"
               aria-label="Delete task"
             >
               <FiTrash2 size={14} />
             </button>
           </li>
         ))}
-        {todos.length === 0 && <li className="text-xs text-offwhite/40">No tasks yet.</li>}
+        {todos.length === 0 && <li className="text-xs text-offwhite/55">No tasks yet.</li>}
       </ul>
     </div>
   )

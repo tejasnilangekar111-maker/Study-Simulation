@@ -43,8 +43,9 @@ export default function SoundMixer() {
         whileHover={{ y: -4 }}
         whileTap={{ scale: 0.95 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="glass rounded-full p-3.5 shadow-xl text-offwhite flex items-center gap-2"
+        className="glass rounded-full p-3.5 shadow-xl text-offwhite flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
         aria-label="Toggle sound mixer"
+        aria-expanded={mixerOpen}
       >
         <FiMusic size={20} />
         <motion.span animate={{ rotate: mixerOpen ? 180 : 0 }}>
