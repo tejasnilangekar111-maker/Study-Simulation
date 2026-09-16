@@ -41,8 +41,17 @@ export default function GrowthPlant() {
   const leafColor = streakBroken ? '#8a7a5c' : undefined
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 sm:bottom-6 pointer-events-none">
-      <div className="glass rounded-2xl px-4 py-3 flex flex-col items-center gap-1 shadow-2xl w-[76px]">
+    // Raised above the timer/mixer row on narrow screens (bottom-24) so it
+    // doesn't horizontally collide with them; desktop has room at bottom-6.
+    <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-30 sm:bottom-6 pointer-events-none">
+      <div
+        className="glass rounded-2xl px-4 py-3 flex flex-col items-center gap-1 shadow-2xl w-[76px] pointer-events-auto"
+        title={
+          streakBroken
+            ? 'Your streak broke — start a new focus session to grow again.'
+            : 'Grows leaf by leaf as your current focus session progresses.'
+        }
+      >
         <svg width="48" height="64" viewBox="0 0 48 64" className="overflow-visible">
           {/* pot */}
           <path d="M14 54 L34 54 L31 62 L17 62 Z" fill="#4a3320" />
@@ -120,7 +129,7 @@ export default function GrowthPlant() {
             )}
           </AnimatePresence>
         </svg>
-        <span className={`text-[10px] uppercase tracking-wide ${streakBroken ? 'text-coral-500/80' : 'text-offwhite/50'}`}>
+        <span className={`text-[10px] uppercase tracking-wide ${streakBroken ? 'text-coral-500/80' : 'text-offwhite/60'}`}>
           {streakBroken ? 'Streak broken' : bloom ? 'Bloomed!' : mode === 'work' ? 'Growing…' : 'Resting'}
         </span>
       </div>

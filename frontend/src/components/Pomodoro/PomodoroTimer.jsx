@@ -45,7 +45,7 @@ export default function PomodoroTimer() {
   const isLow = secondsLeft / totalSeconds < 0.1
 
   return (
-    <div className="fixed bottom-4 left-4 z-30 sm:bottom-6 sm:left-6">
+    <div className="fixed bottom-4 left-4 z-30 sm:bottom-6 sm:left-6 flex flex-col-reverse items-start gap-2">
       <motion.div
         animate={isLow ? { scale: [1, 1.05, 1] } : { scale: 1 }}
         transition={isLow ? { duration: 1.2, repeat: Infinity, ease: 'easeInOut' } : {}}
@@ -67,22 +67,23 @@ export default function PomodoroTimer() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => (isRunning ? pause() : start())}
-              className="bg-coral-500/90 hover:bg-coral-500 text-walnut-950 rounded-full p-2 transition-colors"
+              className="bg-coral-500/90 hover:bg-coral-500 text-walnut-950 rounded-full p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offwhite"
               aria-label={isRunning ? 'Pause' : 'Start'}
             >
               {isRunning ? <FiPause size={16} /> : <FiPlay size={16} />}
             </button>
             <button
               onClick={skip}
-              className="bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors"
+              className="bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
               aria-label="Skip"
             >
               <FiSkipForward size={16} />
             </button>
             <button
               onClick={() => setSettingsOpen((o) => !o)}
-              className="bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors"
+              className="bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
               aria-label="Timer settings"
+              aria-expanded={settingsOpen}
             >
               <FiSettings size={16} />
             </button>

@@ -74,7 +74,7 @@ export default function LandingPage() {
             whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             onClick={handleStart}
-            className="glass rounded-full px-8 py-4 flex items-center gap-3 text-lg font-semibold shadow-2xl hover:shadow-accent-blue/20"
+            className="glass rounded-full px-8 py-4 flex items-center gap-3 text-lg font-semibold shadow-2xl hover:shadow-accent-blue/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
           >
             <FiPlay size={20} />
             Start Focus Session
@@ -85,7 +85,7 @@ export default function LandingPage() {
           variants={item}
           animate={{ y: [0, 8, 0] }}
           transition={{ y: { duration: 2, repeat: Infinity, ease: 'easeInOut' } }}
-          className="absolute bottom-8 flex flex-col items-center gap-1 text-offwhite/40"
+          className="absolute bottom-8 flex flex-col items-center gap-1 text-offwhite/55"
         >
           <span className="text-[10px] uppercase tracking-[0.25em]">Explore</span>
           <FiChevronDown size={16} />

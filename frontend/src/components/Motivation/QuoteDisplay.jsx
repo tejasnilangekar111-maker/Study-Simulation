@@ -28,7 +28,7 @@ export default function QuoteDisplay() {
           className="glass rounded-xl px-5 py-3 text-center shadow-xl"
         >
           <p className="text-sm sm:text-base text-offwhite/90 italic leading-snug">"{quote.text}"</p>
-          <p className="text-[11px] text-offwhite/50 mt-1.5 uppercase tracking-wide">{quote.author}</p>
+          <p className="text-[11px] text-offwhite/60 mt-1.5 uppercase tracking-wide">{quote.author}</p>
         </motion.div>
       </AnimatePresence>
     </div>

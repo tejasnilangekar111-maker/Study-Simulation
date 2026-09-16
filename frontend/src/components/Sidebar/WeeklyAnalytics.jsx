@@ -18,7 +18,7 @@ export default function WeeklyAnalytics() {
                 title={`${d.minutes} min`}
               />
             </div>
-            <span className="text-[9px] text-offwhite/50">{d.label}</span>
+            <span className="text-[9px] text-offwhite/60">{d.label}</span>
           </div>
         ))}
       </div>
