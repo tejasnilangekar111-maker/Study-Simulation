@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FiBookOpen, FiCheckSquare, FiBarChart2 } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 import { useUiStore } from '../../store/uiStore'
+import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = [
   { to: '/study', label: 'Study', icon: FiBookOpen },
@@ -38,6 +39,8 @@ export default function Navbar() {
               </NavLink>
             ))}
           </div>
+
+          <ThemeToggle />
         </motion.nav>
       )}
     </AnimatePresence>

@@ -14,9 +14,11 @@ function StatCard({ icon: Icon, label, value, color }) {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass rounded-xl p-4 flex items-center gap-3"
+      whileHover={{ y: -2 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+      className="glass glass-card rounded-xl p-5 flex items-center gap-4"
     >
-      <div className="rounded-full p-2.5" style={{ backgroundColor: `${color}22`, color }}>
+      <div className="rounded-full p-3" style={{ backgroundColor: `${color}22`, color }}>
         <Icon size={18} />
       </div>
       <div>
@@ -32,8 +34,8 @@ function WeeklyChart({ data }) {
   const max = Math.max(60, ...data.map((d) => d.minutes))
 
   return (
-    <div className="glass rounded-2xl p-6">
-      <h3 className="text-sm font-semibold text-offwhite/90 mb-4">This Week</h3>
+    <div className="glass rounded-2xl p-7">
+      <h3 className="text-sm font-semibold text-offwhite/90 mb-5">This Week</h3>
       <div className="flex items-end justify-between gap-3 h-52">
         {data.map((d, i) => (
           <div
@@ -88,9 +90,9 @@ function HeatmapStrip({ data }) {
   }
 
   return (
-    <div className="glass rounded-2xl p-6">
-      <h3 className="text-sm font-semibold text-offwhite/90 mb-4">Last 28 Days</h3>
-      <div className="grid grid-cols-7 gap-1.5 relative">
+    <div className="glass rounded-2xl p-7">
+      <h3 className="text-sm font-semibold text-offwhite/90 mb-5">Last 28 Days</h3>
+      <div className="grid grid-cols-7 gap-2 relative">
         {data.map((d, i) => (
           <div key={d.date} className="relative">
             <motion.div
@@ -141,25 +143,25 @@ export default function AnalyticsPage() {
       <Sidebar />
       <SleepReminderBanner />
 
-      <div className={`relative z-10 ${contentPaddingClass} px-6 py-24 max-w-5xl mx-auto transition-[padding] duration-300`}>
+      <div className={`relative z-10 ${contentPaddingClass} px-6 sm:px-10 py-28 max-w-6xl mx-auto transition-[padding] duration-300`}>
         <button
           onClick={() => navigate('/study')}
-          className="flex items-center gap-2 text-sm text-offwhite/60 hover:text-offwhite mb-6 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
+          className="flex items-center gap-2 text-sm text-offwhite/60 hover:text-offwhite mb-8 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
         >
           <FiArrowLeft size={14} /> Back to study room
         </button>
 
-        <h1 className="text-3xl sm:text-4xl font-extrabold mb-2">Analytics</h1>
-        <p className="text-offwhite/60 mb-8">Your focus history, streaks, and weekly rhythm.</p>
+        <h1 className="text-3xl sm:text-4xl font-extrabold mb-3">Analytics</h1>
+        <p className="text-offwhite/60 mb-12">Your focus history, streaks, and weekly rhythm.</p>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
           <StatCard icon={FiClock} label="Total Focus Time" value={`${Math.round(totalMinutes)}m`} color="#7fb3e0" />
           <StatCard icon={FiCheckCircle} label="Sessions Completed" value={totalSessions} color="#34d399" />
           <StatCard icon={FiZap} label="Current Streak" value={`${streak.count}d`} color="#ff8066" />
           <StatCard icon={FiAward} label="Best Streak" value={`${streak.best || streak.count}d`} color="#f5efe6" />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-2 gap-7">
           <WeeklyChart data={weekly} />
           <HeatmapStrip data={heatmap} />
         </div>

@@ -45,49 +45,47 @@ export default function PomodoroTimer() {
   const isLow = secondsLeft / totalSeconds < 0.1
 
   return (
-    <div className="fixed bottom-4 left-4 z-30 sm:bottom-6 sm:left-6 flex flex-col-reverse items-start gap-2">
+    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 px-4 pointer-events-none">
       <motion.div
         animate={isLow ? { scale: [1, 1.05, 1] } : { scale: 1 }}
         transition={isLow ? { duration: 1.2, repeat: Infinity, ease: 'easeInOut' } : {}}
-        className="glass rounded-2xl p-4 flex items-center gap-4 shadow-2xl"
+        className="glass rounded-3xl p-8 sm:p-10 flex flex-col items-center gap-6 shadow-2xl pointer-events-auto"
       >
-        <div className="relative w-[90px] h-[90px] shrink-0">
+        <div className="relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] shrink-0">
           <CircularProgress
             progress={progress}
             color={mode === 'work' ? '#ff8066' : '#34d399'}
-            size={90}
+            size={220}
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-sm font-semibold tabular-nums">{formatTime(secondsLeft)}</span>
-            <span className="text-[10px] uppercase tracking-wide text-offwhite/60">{mode}</span>
+            <span className="text-4xl sm:text-5xl font-bold tabular-nums">{formatTime(secondsLeft)}</span>
+            <span className="text-xs uppercase tracking-[0.2em] text-offwhite/60 mt-1">{mode}</span>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => (isRunning ? pause() : start())}
-              className="bg-coral-500/90 hover:bg-coral-500 text-walnut-950 rounded-full p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offwhite"
-              aria-label={isRunning ? 'Pause' : 'Start'}
-            >
-              {isRunning ? <FiPause size={16} /> : <FiPlay size={16} />}
-            </button>
-            <button
-              onClick={skip}
-              className="bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
-              aria-label="Skip"
-            >
-              <FiSkipForward size={16} />
-            </button>
-            <button
-              onClick={() => setSettingsOpen((o) => !o)}
-              className="bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
-              aria-label="Timer settings"
-              aria-expanded={settingsOpen}
-            >
-              <FiSettings size={16} />
-            </button>
-          </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => (isRunning ? pause() : start())}
+            className="bg-coral-500/90 hover:bg-coral-500 text-walnut-950 rounded-full p-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offwhite"
+            aria-label={isRunning ? 'Pause' : 'Start'}
+          >
+            {isRunning ? <FiPause size={22} /> : <FiPlay size={22} />}
+          </button>
+          <button
+            onClick={skip}
+            className="bg-white/10 hover:bg-white/20 rounded-full p-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
+            aria-label="Skip"
+          >
+            <FiSkipForward size={18} />
+          </button>
+          <button
+            onClick={() => setSettingsOpen((o) => !o)}
+            className="bg-white/10 hover:bg-white/20 rounded-full p-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
+            aria-label="Timer settings"
+            aria-expanded={settingsOpen}
+          >
+            <FiSettings size={18} />
+          </button>
         </div>
       </motion.div>
 
@@ -95,7 +93,7 @@ export default function PomodoroTimer() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass rounded-xl p-3 mt-2 w-56 text-sm"
+          className="glass rounded-xl p-3 w-56 text-sm pointer-events-auto"
         >
           <label className="flex items-center justify-between mb-2">
             <span>Work (min)</span>

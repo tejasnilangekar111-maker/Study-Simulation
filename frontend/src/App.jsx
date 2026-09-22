@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import LandingPage from './pages/LandingPage'
 import { useAuthStore } from './store/authStore'
+import { useThemeStore } from './store/themeStore'
 import api from './services/api'
 
 const StudyRoomPage = lazy(() => import('./pages/StudyRoomPage'))
@@ -34,7 +35,12 @@ const PageFade = ({ children }) => (
 export default function App() {
   const token = useAuthStore((s) => s.token)
   const setAuth = useAuthStore((s) => s.setAuth)
+  const theme = useThemeStore((s) => s.theme)
   const [ready, setReady] = useState(!!token)
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
 
   useEffect(() => {
     if (token) {
