@@ -19,12 +19,41 @@
   --font-sans: 'Inter', sans-serif;
 }
 
+/* Light mode: overrides the same CSS variables Tailwind's utilities already
+   reference (bg-walnut-950, text-offwhite, bg-lofi-950, etc.), so every
+   existing component reskins automatically without touching class names. */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-walnut-950: #f7f1e6;
+  --color-walnut-900: #efe4d2;
+  --color-walnut-800: #e2d2b4;
+  --color-walnut-700: #cdb894;
+  --color-accent-blue: #2f6fa8;
+  --color-emerald-500: #158f5f;
+  --color-coral-500: #d9502f;
+  --color-offwhite: #2b1d14;
+  --color-lofi-950: #f3eefb;
+  --color-lofi-900: #e7ddf6;
+  --color-lofi-800: #d9c9ee;
+  --color-lofi-magenta: #b8399e;
+  --color-lofi-violet: #6a4bd6;
+  --color-lofi-amber: #b5691f;
+}
+
+:root {
+  color-scheme: dark;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html, body, #root {
   height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -34,11 +63,40 @@ body {
   color: var(--color-offwhite);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4 {
   line-height: 1.15;
   font-weight: 700;
+}
+
+/* Soft, consistent transitions on interactive elements so hover/focus states
+   ease in rather than snapping — this is the bulk of the "smooth UI" feel. */
+button,
+a,
+input,
+textarea,
+select,
+[role='button'] {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease, opacity 0.25s ease, transform 0.2s ease;
+}
+
+button:active,
+[role='button']:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -50,15 +108,82 @@ h1, h2, h3, h4 {
 ::-webkit-scrollbar-thumb {
   background: rgba(245, 239, 230, 0.15);
   border-radius: 8px;
+  transition: background-color 0.25s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 239, 230, 0.28);
+}
+:root[data-theme='light'] ::-webkit-scrollbar-thumb {
+  background: rgba(43, 29, 20, 0.15);
+}
+:root[data-theme='light'] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(43, 29, 20, 0.28);
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.35);
+}
+:root[data-theme='light'] .glass {
+  background: rgba(43, 29, 20, 0.05);
+  border: 1px solid rgba(43, 29, 20, 0.1);
+  box-shadow: 0 8px 30px -12px rgba(43, 29, 20, 0.18);
+}
+
+/* A calmer, more tactile hover for interactive glass cards — a gentle lift
+   rather than a hard color swap, so hovering feels responsive but not jarring. */
+.glass-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+.glass-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.45);
+}
+
+/* A softer, glowing focus ring instead of a hard-edged one, used app-wide via
+   focus-visible so keyboard navigation stays clear without feeling harsh. */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent-blue) 35%, transparent);
+  border-radius: 6px;
 }
 
 .cursor-none-all, .cursor-none-all * {
   cursor: none !important;
+}
+
+/* Translucent white fills (inputs, chips, hover states) are tuned for a dark
+   backdrop; in light mode they'd nearly disappear, so re-tint them dark
+   instead. Substring attribute selectors catch the utility wherever it
+   appears (base, hover:, etc.) without renaming classes everywhere. */
+:root[data-theme='light'] [class*='bg-white/5'] {
+  background-color: rgba(43, 29, 20, 0.05) !important;
+}
+:root[data-theme='light'] [class*='bg-white/10'] {
+  background-color: rgba(43, 29, 20, 0.07) !important;
+}
+:root[data-theme='light'] [class*='bg-white/15'] {
+  background-color: rgba(43, 29, 20, 0.1) !important;
+}
+:root[data-theme='light'] [class*='bg-white/20'] {
+  background-color: rgba(43, 29, 20, 0.14) !important;
+}
+:root[data-theme='light'] [class*='hover:bg-white/10']:hover {
+  background-color: rgba(43, 29, 20, 0.1) !important;
+}
+:root[data-theme='light'] [class*='hover:bg-white/15']:hover {
+  background-color: rgba(43, 29, 20, 0.12) !important;
+}
+:root[data-theme='light'] [class*='hover:bg-white/20']:hover {
+  background-color: rgba(43, 29, 20, 0.16) !important;
+}
+:root[data-theme='light'] [class*='border-white/10'] {
+  border-color: rgba(43, 29, 20, 0.14) !important;
+}
+:root[data-theme='light'] [class*='bg-black/50'] {
+  background-color: rgba(0, 0, 0, 0.3) !important;
 }

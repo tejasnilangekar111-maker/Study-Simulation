@@ -1,15 +1,17 @@
-import { useEffect, useMemo, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useMemo } from 'react'
+import { motion } from 'framer-motion'
 import RainLayer from './RainLayer'
+import AmbientGlow from './AmbientGlow'
 
-const BACKGROUNDS = [
-  '/backgrounds/study-1.jpg',
-  '/backgrounds/study-2.jpg',
-  '/backgrounds/study-3.jpg',
-  '/backgrounds/study-4.jpg',
+// Fixed low-opacity glow colors — not tied to the theme variables — so they
+// read as a gentle wash in both dark and light mode by construction, instead
+// of relying on a photograph's exposure to happen to work in both.
+const GLOW_COLORS = [
+  'rgba(232,121,201,0.16)',
+  'rgba(155,123,255,0.18)',
+  'rgba(255,179,122,0.14)',
+  'rgba(127,179,224,0.14)',
 ]
-
-const ROTATE_MS = 45000
 
 function BokehLights() {
   const lights = useMemo(
@@ -43,43 +45,16 @@ function BokehLights() {
   )
 }
 
+// No photography — a soft, animated glow plus rain and drifting bokeh lights
+// carry the ambience. Fully CSS-driven, so it's guaranteed to read correctly
+// in both themes instead of fighting a photo's fixed exposure.
 export default function LofiScene({ children }) {
-  const [index, setIndex] = useState(() => Math.floor(Math.random() * BACKGROUNDS.length))
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((i) => (i + 1) % BACKGROUNDS.length)
-    }, ROTATE_MS)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
     <div className="absolute inset-0 overflow-hidden bg-lofi-950">
-      <AnimatePresence mode="sync">
-        <motion.div
-          key={BACKGROUNDS[index]}
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 2 }}
-        >
-          <motion.div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${BACKGROUNDS[index]})` }}
-            initial={{ scale: 1 }}
-            animate={{ scale: 1.08 }}
-            transition={{ duration: ROTATE_MS / 1000, ease: 'linear' }}
-          />
-        </motion.div>
-      </AnimatePresence>
+      <AmbientGlow colors={GLOW_COLORS} />
 
       <RainLayer intensity={0.4} />
       <BokehLights />
-
-      {/* darken + vignette so foreground UI (timer, sidebar, plant) stays legible */}
-      <div className="absolute inset-0 bg-gradient-to-b from-lofi-950/30 via-lofi-950/35 to-lofi-950/85" />
-      <div className="absolute inset-0 bg-gradient-to-r from-lofi-950/50 via-transparent to-lofi-950/30" />
 
       {children}
     </div>

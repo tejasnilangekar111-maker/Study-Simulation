@@ -1,9 +1,18 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { FiPlay, FiChevronDown } from 'react-icons/fi'
-import LibraryScene from '../components/LibraryScene/LibraryScene'
-import StudyGroupIllustration from '../components/LibraryScene/StudyGroupIllustration'
+import AmbientGlow from '../components/LibraryScene/AmbientGlow'
+import ThemeToggle from '../components/Navbar/ThemeToggle'
 import { startAudioEngine } from '../hooks/useProceduralAudio'
+
+// Fixed low-opacity glow colors — warm coral/blue instead of the lofi
+// magenta/violet palette — reads gently in both themes by construction,
+// no photograph to fight for correct exposure.
+const GLOW_COLORS = [
+  'rgba(255,128,102,0.16)',
+  'rgba(127,179,224,0.18)',
+  'rgba(52,211,153,0.12)',
+]
 
 const container = {
   hidden: { opacity: 0 },
@@ -28,21 +37,10 @@ export default function LandingPage() {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-walnut-950">
-      <LibraryScene showWindow={false} />
+      <AmbientGlow colors={GLOW_COLORS} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-walnut-950/30 to-walnut-950" />
 
-      {/* Study-group illustration, anchored low so it reads as a library desk
-          scene beneath the hero copy, composed under the rain/dust/light layers. */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 0.9, y: 0 }}
-        transition={{ duration: 1.2, delay: 0.6, ease: 'easeOut' }}
-        className="absolute bottom-0 left-0 right-0 z-[5] pointer-events-none flex justify-center"
-      >
-        <StudyGroupIllustration className="w-full max-w-3xl opacity-90" />
-      </motion.div>
-
-      {/* Scrim so the hero copy stays legible over the illustration/scene */}
-      <div className="absolute inset-0 z-[6] bg-gradient-to-b from-walnut-950/20 via-walnut-950/10 to-walnut-950/95 pointer-events-none" />
+      <ThemeToggle className="fixed top-4 right-4 z-20" />
 
       <motion.div
         variants={container}
